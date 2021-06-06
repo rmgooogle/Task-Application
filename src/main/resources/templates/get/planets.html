@@ -1,0 +1,48 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    sddsa
+<head>
+    <meta charset="UTF-8">
+    <title>planets</title>
+</head>
+<body>
+<div class="panel-body">
+    <table class="table table-hover ">
+        <thead class="thead-inverse">
+        <tr>
+            <th>ID</th>
+            <th>NAME </th>
+            <th >AGE </th>
+            <th >PLANET </th>
+            <th >PLANETS </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="allPlanets : ${allPlanets}">
+            <td th:text="${allPlanets.id}">Id</td>
+            <td th:text="${allPlanets.name}">Name</td>
+            <td th:text="${allPlanets.age}">Age</td>
+            <td th:text="${allPlanets.planet}">Planet</td>
+
+            <td>
+                 <span th:each="planet: ${grandMaster.planets}">
+                    <span th:text="${planet.name}"/>
+                     <br>
+                </span>
+            </td >
+
+
+            <td><a th:href="@{'grandMasters/' + ${grandMaster.id} + '/update'} "> View </a></td>
+            <td><a th:href="@{'grandMasters/' + ${grandMaster.id} + '/delete'} "> Delete </a></td>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="container-fluid" style="margin-top: 20px">
+    <a th:href="@{'grandMaster/new'} "> Create </a></td>
+</div>
+
+</body>
+</html>
