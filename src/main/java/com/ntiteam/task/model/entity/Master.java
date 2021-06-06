@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "MASTER")
+@Table(name = "MASTERS")
 public class Master {
 
     @Id

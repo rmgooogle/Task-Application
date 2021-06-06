@@ -1,5 +1,6 @@
 package com.ntiteam.task.model.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,8 +10,9 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "PLANET")
+@Table(name = "PLANETS")
 public class Planet {
 
     @Id
@@ -23,19 +25,4 @@ public class Planet {
     @ManyToOne
     @JoinColumn(name = "master_id", referencedColumnName = "id")
     private Master master;
-
-    public Planet(Long id, String name, Master master) {
-        this.id = id;
-        this.name = name;
-        this.master = master;
-    }
-
-    @Override
-    public String toString() {
-        return "Planet{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", master=" + master +
-                '}';
-    }
 }
