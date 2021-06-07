@@ -1,11 +1,11 @@
 package com.ntiteam.task.service.impl;
 
-import com.ntiteam.task.model.dto.MasterDto;
-import com.ntiteam.task.model.dto.PlanetDto;
-import com.ntiteam.task.model.entity.Master;
-import com.ntiteam.task.model.entity.Planet;
+import com.ntiteam.task.dto.MasterDto;
+import com.ntiteam.task.dto.PlanetDto;
 import com.ntiteam.task.exception.MasterNotFoundException;
-import com.ntiteam.task.exception.PlanetNotFoundExceprion;
+import com.ntiteam.task.exception.PlanetNotFoundException;
+import com.ntiteam.task.model.Master;
+import com.ntiteam.task.model.Planet;
 import com.ntiteam.task.repository.MasterRepo;
 import com.ntiteam.task.repository.PlanetRepo;
 import com.ntiteam.task.service.WorldMasterService;
@@ -54,46 +54,26 @@ public class WorldMasterServiceImpl implements WorldMasterService {
     public PlanetDto getPlanetById(Long id) {
         Optional<Planet> planet = planetRepo.findById(id);
         if (planet.isEmpty()) {
-            throw new PlanetNotFoundExceprion("Planet not found");
+            throw new PlanetNotFoundException("Planet not found");
         }
         return modelMapper.map(planet.get(), PlanetDto.class);
     }
 
-    //TODO need refactoring,
-    // if names the same, but ages different then we have more, than 1 name
     @Override
     public void createMaster(String name, Long age) {
-        if (masterRepo.findByName(name) != null) {
-            if ((masterRepo.findByName(name).getName().equals(name)) &&
-                    (masterRepo.findByName(name).getAge() == age)) {
-                System.out.println("Master with name " + name + " and age " + age + " is already created");
-                return;
-            }
-        }
-        Master master = new Master();
-        master.setName(name);
-        master.setAge(age);
-        masterRepo.save(master);
+        masterRepo.save(modelMapper.map(new MasterDto(name, age), Master.class)); // or masterRepo.save(new Master(name, age)?
     }
 
     @Override
-    public PlanetDto createPlanet(String name) {
-
-        if (planetRepo.findByName(name) == null) {
-            Planet createdPlanet = new Planet();
-            createdPlanet.setName(name);
-            planetRepo.save(createdPlanet);
-        } else {
-            System.out.println("Planet with " + name + " is already created.");
-        }
-        return modelMapper.map(planetRepo.findByName(name), PlanetDto.class);
+    public void createPlanet(String name) {
+        planetRepo.save(modelMapper.map(new PlanetDto(name), Planet.class)); // or planetRepo.save(new Planet(name)?
     }
 
     @Override
     public void deletePlanetById(Long id) {
         Optional<Planet> planet = planetRepo.findById(id);
         if (planet.isEmpty()) {
-            throw new PlanetNotFoundExceprion("Planet not found");
+            throw new PlanetNotFoundException("Planet not found");
         }
         planetRepo.deleteById(id);
     }
@@ -102,7 +82,7 @@ public class WorldMasterServiceImpl implements WorldMasterService {
     public MasterDto updateMasterByPlanet(Long idPlanet, Long idMaster) {
         Optional<Planet> planet = planetRepo.findById(idPlanet);
         if (planet.isEmpty()) {
-            throw new PlanetNotFoundExceprion("Planet not found");
+            throw new PlanetNotFoundException("Planet not found");
         }
         Optional<Master> grandMaster = masterRepo.findById(idMaster);
         if (grandMaster.isEmpty()) {

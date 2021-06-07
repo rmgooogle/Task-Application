@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class PlanetNotFoundExceprion extends RuntimeException {
+public class PlanetNotFoundException extends RuntimeException {
 
-    public PlanetNotFoundExceprion(String message) {
+    public PlanetNotFoundException(String message) {
         super(message);
     }
 }

@@ -1,4 +1,4 @@
-package com.ntiteam.task.model.entity;
+package com.ntiteam.task.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,13 +15,23 @@ import javax.persistence.*;
 @Table(name = "PLANETS")
 public class Planet {
 
+    public Planet(String name) {
+        this.name = name;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Наименование планеты
+     */
     @Column(name = "name")
     private String name;
 
+    /**
+     * Привязка планеты к мастеру
+     */
     @ManyToOne
     @JoinColumn(name = "master_id", referencedColumnName = "id")
     private Master master;

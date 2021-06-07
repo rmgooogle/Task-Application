@@ -1,8 +1,12 @@
 package com.ntiteam.task.controller;
 
-import com.ntiteam.task.model.dto.PlanetDto;
+import com.ntiteam.task.dto.MasterDto;
+import com.ntiteam.task.dto.PlanetDto;
 import com.ntiteam.task.service.WorldMasterService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class PlanetController {
@@ -14,8 +18,8 @@ public class PlanetController {
     }
 
     @GetMapping({"/get/planet/{id}"})
-    public PlanetDto getPlanetById(@PathVariable Long id) {
-        return worldMasterService.getPlanetById(id);
+    public ResponseEntity<PlanetDto> getPlanetById(@PathVariable Long id) {
+        return ResponseEntity.ok(worldMasterService.getPlanetById(id));
     }
 
     @PostMapping(value = "/add/planet/{name}")

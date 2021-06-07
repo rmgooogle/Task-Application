@@ -1,8 +1,7 @@
 package com.ntiteam.task.controller;
 
-import com.ntiteam.task.model.dto.MasterDto;
+import com.ntiteam.task.dto.MasterDto;
 import com.ntiteam.task.service.WorldMasterService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,34 +20,34 @@ public class GrandMasterController {
     }
 
     @GetMapping({"/get/all"})
-    public List<MasterDto> getAll() {
-        return worldMasterService.getAll();
+    public ResponseEntity<List<MasterDto>> getAll() {
+        return ResponseEntity.ok(worldMasterService.getAll());
     }
 
     @GetMapping({"/get/master/{id}"})
-    public MasterDto getMasterById(@PathVariable Long id) {
-        return worldMasterService.getMasterById(id);
+    public ResponseEntity<MasterDto> getMasterById(@PathVariable Long id) {
+        return ResponseEntity.ok(worldMasterService.getMasterById(id));
     }
 
     @PostMapping("/add/master/{name}/{age}")
-    public ResponseEntity<?> addMaster(@PathVariable String name, @PathVariable Long age) {
+    public ResponseEntity<String> addMaster(@PathVariable String name, @PathVariable Long age) {
         worldMasterService.createMaster(name, age);
-        return new ResponseEntity("New Master " + name + ", " + age + " added", HttpStatus.OK);
+        return ResponseEntity.ok("New Master " + name + ", " + age + " added");
     }
 
     @PostMapping("/edit/master/{idMaster}/{idPlanet}")
-    public ResponseEntity<?> setPlanetToMaster(@PathVariable Long idPlanet, @PathVariable Long idMaster) {
+    public ResponseEntity<String> setPlanetToMaster(@PathVariable Long idPlanet, @PathVariable Long idMaster) {
         worldMasterService.updateMasterByPlanet(idPlanet, idMaster);
-        return new ResponseEntity("upload!", HttpStatus.OK);
+        return ResponseEntity.ok("Upload!");
     }
 
     @GetMapping("/get/masters/slacker")
-    public List<MasterDto> getSlackers() {
-        return worldMasterService.getSlackers();
+    public ResponseEntity<List<MasterDto>> getSlackers() {
+        return ResponseEntity.ok(worldMasterService.getSlackers());
     }
 
     @GetMapping("/get/masters/young")
-    public List<MasterDto> getTenYoungMasters() {
-        return worldMasterService.getTenYoungMasters();
+    public ResponseEntity<List<MasterDto>> getTenYoungMasters() {
+        return ResponseEntity.ok(worldMasterService.getTenYoungMasters());
     }
 }

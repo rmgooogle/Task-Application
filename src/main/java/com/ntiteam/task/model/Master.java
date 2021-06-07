@@ -1,4 +1,4 @@
-package com.ntiteam.task.model.entity;
+package com.ntiteam.task.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,16 +17,30 @@ import java.util.List;
 @Table(name = "MASTERS")
 public class Master {
 
+    public Master(String name, Long age) {
+        this.name = name;
+        this.age = age;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Имя мастера
+     */
     @Column(name = "name")
     private String name;
 
+    /**
+     * Возраст мастера
+     */
     @Column(name = "age")
     private Long age;
 
+    /**
+     * Связь мастера с планетой
+     */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "master")
     private List<Planet> planets = new ArrayList<>();
 }

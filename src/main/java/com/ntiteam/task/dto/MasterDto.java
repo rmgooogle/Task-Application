@@ -1,6 +1,6 @@
-package com.ntiteam.task.model.dto;
+package com.ntiteam.task.dto;
 
-import com.ntiteam.task.model.entity.Master;
+import com.ntiteam.task.model.Master;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,14 +14,26 @@ import java.util.List;
 @AllArgsConstructor
 public class MasterDto {
 
+    public MasterDto(String name, Long age) {
+        this.name = name;
+        this.age = age;
+    }
+
     /**
-     * {@link Master#getName()} ()}
+     * {@link Master#getId()}
+     */
+    private Long id;
+
+    /**
+     * {@link Master#getName()}
      */
     private String name;
+
     /**
      * {@link Master#getAge()}
      */
     private Long age;
+
     /**
      * {@link Master#getPlanets()}
      */

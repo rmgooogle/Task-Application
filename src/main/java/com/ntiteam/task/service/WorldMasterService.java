@@ -1,20 +1,20 @@
 package com.ntiteam.task.service;
 
-import com.ntiteam.task.model.dto.MasterDto;
-import com.ntiteam.task.model.dto.PlanetDto;
+import com.ntiteam.task.dto.MasterDto;
+import com.ntiteam.task.dto.PlanetDto;
 
 import java.util.List;
 
 public interface WorldMasterService {
 
     /**
-     * @return all Masters
+     * @return - all Masters
      */
     List<MasterDto> getAll();
 
     /**
-     * @param id
-     * @return Masters by id
+     * @param id -
+     * @return - MasterDto
      */
     MasterDto getMasterById(Long id);
 
@@ -25,39 +25,41 @@ public interface WorldMasterService {
     PlanetDto getPlanetById(Long id);
 
     /**
-     * create new Masters
-     * Masters.Name = @param name,
-     * Masters.Age = @param age
+     * create new Master
+     *
+     * @param name - master name
+     * @param age  - master age
      */
     void createMaster(String name, Long age);
 
     /**
-     * @param name create new Planet
-     *             Planet.name = @param name
+     * create new Planet
+     *
+     * @param name - Planet name
      */
-    PlanetDto createPlanet(String name);
+    void createPlanet(String name);
 
     /**
-     * delete Planet by
+     * delete Planet by id
      *
      * @param id
      */
     void deletePlanetById(Long id);
 
     /**
-     * @param idPlanet
-     * @param idMaster
-     * @return updated Masters
+     * @param idPlanet - id Planet, которой назначается мастер
+     * @param idMaster - id Master, к которому добавляется планета
+     * @return - возвращаются обновленный Master
      */
     MasterDto updateMasterByPlanet(Long idPlanet, Long idMaster);
 
     /**
-     * @return slackers (Masters without planets)
+     * @return - Возвращает список Masters не имеющих планет
      */
     List<MasterDto> getSlackers();
 
     /**
-     * @return top 10 young Masters
+     * @return - List<Master> top 10 young Masters
      */
     List<MasterDto> getTenYoungMasters();
 }
