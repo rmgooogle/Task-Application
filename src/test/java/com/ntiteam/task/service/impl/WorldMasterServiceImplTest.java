@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 class WorldMasterServiceImplTest {
@@ -37,7 +38,6 @@ class WorldMasterServiceImplTest {
 
     MasterDto masterDto = new MasterDto();
     Master master = new Master();
-
     PlanetDto planetDto = new PlanetDto();
     Planet planet = new Planet();
     List<Planet> planets = new ArrayList<>();
@@ -51,14 +51,11 @@ class WorldMasterServiceImplTest {
         planetDto.setId(1L);
         planet.setName("TestName");
         planet.setId(1L);
-
         planetDtos.add(planetDto);
         planets.add(planet);
-
         masterDto.setId(1L);
         masterDto.setName("TestName");
         masterDto.setAge(26L);
-
         master.setId(1L);
         master.setName("TestName");
         master.setAge(26L);
@@ -73,6 +70,7 @@ class WorldMasterServiceImplTest {
         when(modelMapper.map(any(), any())).thenReturn(masterDto);
         List<MasterDto> masterDtos = worldMasterServiceTest.getAll();
         verify(masterRepoTest, times(1)).findAll();
+        assertNotNull(masterDtos);
         assertEquals(masterDtos.size(), 1);
         assertEquals(masters.size(), 1);
     }
@@ -82,17 +80,20 @@ class WorldMasterServiceImplTest {
         Mockito.when(modelMapper.map(any(), any())).thenReturn(masterDto);
         Mockito.when(masterRepoTest.findById(anyLong())).thenReturn(Optional.of(master));
         MasterDto returnedMasterDto = worldMasterServiceTest.getMasterById(1L);
-        verify(masterRepoTest, times(1)).findById(anyLong());
+        assertNotNull(returnedMasterDto);
         assertEquals(returnedMasterDto.getId(), 1L);
+        verify(masterRepoTest, times(1)).findById(anyLong());
+
     }
 
     @Test
     void getPlanetById() {
         Mockito.when(modelMapper.map(any(), any())).thenReturn(planetDto);
         Mockito.when(planetRepoTest.findById(anyLong())).thenReturn(Optional.of(planet));
-        PlanetDto returnedPlanet = worldMasterServiceTest.getPlanetById(1L);
+        PlanetDto returnedPlanetDto = worldMasterServiceTest.getPlanetById(1L);
+        assertNotNull(returnedPlanetDto);
+        assertEquals(returnedPlanetDto.getId(), 1L);
         verify(planetRepoTest, times(1)).findById(anyLong());
-        assertEquals(returnedPlanet.getId(), 1L);
     }
 
     @Test
@@ -120,10 +121,10 @@ class WorldMasterServiceImplTest {
         when(planetRepoTest.findById(anyLong())).thenReturn(Optional.of(planet));
         when(masterRepoTest.findById(anyLong())).thenReturn(Optional.of(master));
         worldMasterServiceTest.updateMasterByPlanet(1L, 1L);
+        assertEquals(1L, planet.getMaster().getId());
         verify(planetRepoTest, times(1)).findById(anyLong());
         verify(masterRepoTest, times(1)).findById(anyLong());
         verify(masterRepoTest, times(1)).save(any());
-        assertEquals(1L, planet.getMaster().getId());
     }
 
     @Test

@@ -20,12 +20,14 @@ public class PlanetController {
     }
 
     @PostMapping(value = "/add/planet/{name}")
-    public void createPlanet(@PathVariable String name) {
+    public ResponseEntity<String> createPlanet(@PathVariable String name) {
         worldMasterService.createPlanet(name);
+        return ResponseEntity.ok("Created");
     }
 
     @DeleteMapping({"/delete/planet/{id}"})
-    public void deletePlanetById(@PathVariable Long id) {
+    public ResponseEntity<String> deletePlanetById(@PathVariable Long id) {
         worldMasterService.deletePlanetById(id);
+        return ResponseEntity.ok("Deleted");
     }
 }
