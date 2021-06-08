@@ -34,6 +34,8 @@
 8) Get /get/master/{idMaster}
 
 
+Для проверки методов рекомендую использовать набор команд [Postman](https://github.com/rmgooogle/Task-Application/blob/master/TestTask.postman_collection.json)
+
 
 
 
