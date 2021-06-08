@@ -6,6 +6,7 @@ import com.ntiteam.task.model.Master;
 import com.ntiteam.task.model.Planet;
 import com.ntiteam.task.repository.MasterRepo;
 import com.ntiteam.task.repository.PlanetRepo;
+import com.ntiteam.task.service.WorldMasterService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

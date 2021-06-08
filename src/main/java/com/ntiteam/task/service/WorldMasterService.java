@@ -8,58 +8,58 @@ import java.util.List;
 public interface WorldMasterService {
 
     /**
-     * @return - all Masters
+     * @return - Возвращает список всех повелителей
      */
     List<MasterDto> getAll();
 
     /**
      * @param id -
-     * @return - MasterDto
+     * @return - возвращает повелителя по id
      */
     MasterDto getMasterById(Long id);
 
     /**
      * @param id
-     * @return Planet by id
+     * @return - возвращает планету по id
      */
     PlanetDto getPlanetById(Long id);
 
     /**
-     * create new Master
+     * создание нового повелителя
      *
-     * @param name - master name
-     * @param age  - master age
+     * @param name - Има повелителя
+     * @param age  - Возраст повелителя
      */
     void createMaster(String name, Long age);
 
     /**
-     * create new Planet
+     * создание новой планеты
      *
      * @param name - Planet name
      */
     void createPlanet(String name);
 
     /**
-     * delete Planet by id
+     * удаление планеты по id
      *
      * @param id
      */
     void deletePlanetById(Long id);
 
     /**
-     * @param idPlanet - id Planet, которой назначается мастер
-     * @param idMaster - id Master, к которому добавляется планета
+     * @param idPlanet - id планеты, которой назначается мастер
+     * @param idMaster - id повелителя, к которому добавляется планета
      * @return - возвращаются обновленный Master
      */
     MasterDto updateMasterByPlanet(Long idPlanet, Long idMaster);
 
     /**
-     * @return - Возвращает список Masters не имеющих планет
+     * @return - Возвращает список повелителей не имеющих планет
      */
     List<MasterDto> getSlackers();
 
     /**
-     * @return - List<Master> top 10 young Masters
+     * @return - List<Master> возвращает 10 молодых отсортированных повелителей
      */
     List<MasterDto> getTenYoungMasters();
 }

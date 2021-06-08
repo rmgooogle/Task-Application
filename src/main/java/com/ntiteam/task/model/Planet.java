@@ -15,24 +15,22 @@ import javax.persistence.*;
 @Table(name = "PLANETS")
 public class Planet {
 
-    public Planet(String name) {
-        this.name = name;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     /**
      * Наименование планеты
      */
     @Column(name = "name")
     private String name;
-
     /**
-     * Привязка планеты к мастеру
+     * Привязка планеты к повелителю
      */
     @ManyToOne
     @JoinColumn(name = "master_id", referencedColumnName = "id")
     private Master master;
+
+    public Planet(String name) {
+        this.name = name;
+    }
 }
