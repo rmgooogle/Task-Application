@@ -29,9 +29,10 @@
 5) Get /get/masters/slacker
 6) Get /get/masters/young
 
-Дополнительные методы
-7) Get /get/all 
+#### Дополнительные методы
+7) Get /get/all
 8) Get /get/master/{idMaster}
+
 
 
 
