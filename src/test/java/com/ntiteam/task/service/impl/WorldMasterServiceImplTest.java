@@ -2,11 +2,12 @@ package com.ntiteam.task.service.impl;
 
 import com.ntiteam.task.dto.MasterDto;
 import com.ntiteam.task.dto.PlanetDto;
+import com.ntiteam.task.dto.SaveMasterDto;
+import com.ntiteam.task.dto.UpdateDto;
 import com.ntiteam.task.model.Master;
 import com.ntiteam.task.model.Planet;
 import com.ntiteam.task.repository.MasterRepo;
 import com.ntiteam.task.repository.PlanetRepo;
-import com.ntiteam.task.service.WorldMasterService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -38,8 +39,10 @@ class WorldMasterServiceImplTest {
     ModelMapper modelMapper;
 
     MasterDto masterDto = new MasterDto();
+    SaveMasterDto saveMasterDto;
+    UpdateDto updateDto;
     Master master = new Master();
-    PlanetDto planetDto = new PlanetDto();
+    PlanetDto planetDto;
     Planet planet = new Planet();
     List<Planet> planets = new ArrayList<>();
     List<PlanetDto> planetDtos = new ArrayList<>();
@@ -48,15 +51,21 @@ class WorldMasterServiceImplTest {
     void setUp() {
         MockitoAnnotations.initMocks(this);
         this.worldMasterServiceTest = new WorldMasterServiceImpl(masterRepoTest, planetRepoTest, modelMapper);
-        planetDto.setName("TestName");
-        planetDto.setId(1L);
+
+        planetDto = new PlanetDto(1L, "TestName");
+        saveMasterDto = new SaveMasterDto("TestName", 26L);
+        updateDto = new UpdateDto(1L, 1L);
+
         planet.setName("TestName");
         planet.setId(1L);
+
         planetDtos.add(planetDto);
         planets.add(planet);
+
         masterDto.setId(1L);
         masterDto.setName("TestName");
         masterDto.setAge(26L);
+
         master.setId(1L);
         master.setName("TestName");
         master.setAge(26L);
@@ -99,8 +108,8 @@ class WorldMasterServiceImplTest {
 
     @Test
     void createMaster() {
-        worldMasterServiceTest.createMaster("name", 25L);
-        worldMasterServiceTest.createMaster("name2", 252L);
+        worldMasterServiceTest.createMaster(saveMasterDto);
+        worldMasterServiceTest.createMaster(saveMasterDto);
         verify(masterRepoTest, times(2)).save(any());
     }
 
@@ -121,7 +130,7 @@ class WorldMasterServiceImplTest {
     void updateMasterByPlanet() {
         when(planetRepoTest.findById(anyLong())).thenReturn(Optional.of(planet));
         when(masterRepoTest.findById(anyLong())).thenReturn(Optional.of(master));
-        worldMasterServiceTest.updateMasterByPlanet(1L, 1L);
+        worldMasterServiceTest.updateMasterByPlanet(updateDto);
         assertEquals(1L, planet.getMaster().getId());
         verify(planetRepoTest, times(1)).findById(anyLong());
         verify(masterRepoTest, times(1)).findById(anyLong());

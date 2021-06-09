@@ -1,12 +1,11 @@
 package com.ntiteam.task.controller;
 
 import com.ntiteam.task.dto.MasterDto;
+import com.ntiteam.task.dto.SaveMasterDto;
+import com.ntiteam.task.dto.UpdateDto;
 import com.ntiteam.task.service.WorldMasterService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,15 +28,15 @@ public class GrandMasterController {
         return ResponseEntity.ok(worldMasterService.getMasterById(id));
     }
 
-    @PostMapping("/add/master/{name}/{age}")
-    public ResponseEntity<String> addMaster(@PathVariable String name, @PathVariable Long age) {
-        worldMasterService.createMaster(name, age);
-        return ResponseEntity.ok("New Master " + name + ", " + age + " added");
+    @PostMapping("/add/master")
+    public ResponseEntity<String> addMaster(@RequestBody SaveMasterDto dto) {
+        worldMasterService.createMaster(dto);
+        return ResponseEntity.ok("New Master added");
     }
 
-    @PostMapping("/edit/master/{idMaster}/{idPlanet}")
-    public ResponseEntity<String> setPlanetToMaster(@PathVariable Long idPlanet, @PathVariable Long idMaster) {
-        worldMasterService.updateMasterByPlanet(idPlanet, idMaster);
+    @PostMapping("/edit/master")
+    public ResponseEntity<String> setPlanetToMaster(@RequestBody UpdateDto dto) {
+        worldMasterService.updateMasterByPlanet(dto);
         return ResponseEntity.ok("Upload!");
     }
 

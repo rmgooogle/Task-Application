@@ -22,9 +22,9 @@
 Написать тесты для этого функционала
 
 ### Методы API
-1) Post /add/master/{name}/{age} 
+1) Post /add/master
 2) Post /add/planet/{name}
-3) Post /edit/master/{idMaster}/{idPlanet}
+3) Post /edit/master
 4) Delete /delete/planet/{id}
 5) Get /get/masters/slacker
 6) Get /get/masters/young
@@ -34,8 +34,8 @@
 8) Get /get/master/{idMaster}
 
 
-Для проверки методов рекомендую использовать набор команд [Postman](https://github.com/rmgooogle/Task-Application/blob/master/TestTask.postman_collection.json)
-
+Для проверки методов рекомендую использовать [Swagger](https://swagger.io), при запуске приложения, перейти по [адресу](http://localhost:8080/swagger-ui-task.html).
+ Либо сохраненный набор команд [Postman](https://github.com/rmgooogle/Task-Application/blob/master/TestTask.postman_collection.json). 
 
 
 

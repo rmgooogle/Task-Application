@@ -2,40 +2,48 @@ package com.ntiteam.task.service;
 
 import com.ntiteam.task.dto.MasterDto;
 import com.ntiteam.task.dto.PlanetDto;
+import com.ntiteam.task.dto.SaveMasterDto;
+import com.ntiteam.task.dto.UpdateDto;
 
 import java.util.List;
 
 public interface WorldMasterService {
 
+
     /**
-     * @return - Возвращает список всех повелителей
+     * Возвращает список всех повелителей
+     *
+     * @return - List  <{@link PlanetDto}>
      */
     List<MasterDto> getAll();
 
     /**
+     * озвращает повелителя по id
+     *
      * @param id -
-     * @return - возвращает повелителя по id
+     * @return - возвращает {@link PlanetDto}
      */
     MasterDto getMasterById(Long id);
 
     /**
+     * возвращает планету по id
+     *
      * @param id
-     * @return - возвращает планету по id
+     * @return - возвращает {@link PlanetDto}
      */
     PlanetDto getPlanetById(Long id);
 
     /**
      * создание нового повелителя
      *
-     * @param name - Има повелителя
-     * @param age  - Возраст повелителя
+     *@param dto - Состоит из двух параметров {@link SaveMasterDto#getName()} , {@link SaveMasterDto#getAge()}
      */
-    void createMaster(String name, Long age);
+    void createMaster(SaveMasterDto dto);
 
     /**
      * создание новой планеты
      *
-     * @param name - Planet name
+     * @param name - Имя планеты
      */
     void createPlanet(String name);
 
@@ -47,11 +55,12 @@ public interface WorldMasterService {
     void deletePlanetById(Long id);
 
     /**
-     * @param idPlanet - id планеты, которой назначается мастер
-     * @param idMaster - id повелителя, к которому добавляется планета
+     * Назначение планеты повелителю
+     *
+     * @param updateDto - Состоит из двух id {masterId, planetId}
      * @return - возвращаются обновленный Master
      */
-    MasterDto updateMasterByPlanet(Long idPlanet, Long idMaster);
+    MasterDto updateMasterByPlanet(UpdateDto updateDto);
 
     /**
      * @return - Возвращает список повелителей не имеющих планет

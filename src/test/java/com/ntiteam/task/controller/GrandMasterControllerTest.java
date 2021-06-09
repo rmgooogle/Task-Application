@@ -79,7 +79,7 @@ class GrandMasterControllerTest {
 
     @Test
     void setPlanetToMaster() throws Exception {
-        Mockito.when(worldMasterService.updateMasterByPlanet(any(), any())).thenReturn(masterDto);
+        Mockito.when(worldMasterService.updateMasterByPlanet(any())).thenReturn(masterDto);
         mockMvc.perform(post("/edit/master/5/5"))
                 .andExpect(status().isOk());
     }

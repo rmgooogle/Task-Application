@@ -6,18 +6,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MasterDto {
-
-    /**
-     * {@link Master#getId()}
-     */
-    private Long id;
+public class SaveMasterDto {
 
     /**
      * {@link Master#getName()}
@@ -28,9 +21,4 @@ public class MasterDto {
      * {@link Master#getAge()}
      */
     private Long age;
-
-    /**
-     * {@link Master#getPlanets()}
-     */
-    private List<PlanetDto> planets;
 }

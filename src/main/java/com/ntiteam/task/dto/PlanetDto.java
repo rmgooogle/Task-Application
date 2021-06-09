@@ -12,10 +12,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PlanetDto {
 
-    public PlanetDto(String name) {
-        this.name = name;
-    }
-
     /**
      * {@link Planet#getId()}
      */

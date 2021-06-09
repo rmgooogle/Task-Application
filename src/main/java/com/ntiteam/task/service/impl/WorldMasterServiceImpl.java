@@ -2,6 +2,8 @@ package com.ntiteam.task.service.impl;
 
 import com.ntiteam.task.dto.MasterDto;
 import com.ntiteam.task.dto.PlanetDto;
+import com.ntiteam.task.dto.SaveMasterDto;
+import com.ntiteam.task.dto.UpdateDto;
 import com.ntiteam.task.exception.MasterNotFoundException;
 import com.ntiteam.task.exception.PlanetNotFoundException;
 import com.ntiteam.task.model.Master;
@@ -43,11 +45,11 @@ public class WorldMasterServiceImpl implements WorldMasterService {
 
     @Override
     public MasterDto getMasterById(Long id) {
-        Optional<Master> Master = masterRepo.findById(id);
-        if (Master.isEmpty()) {
+        Optional<Master> master = masterRepo.findById(id);
+        if (master.isEmpty()) {
             throw new MasterNotFoundException("Master not found");
         }
-        return modelMapper.map(Master.get(), MasterDto.class);
+        return modelMapper.map(master.get(), MasterDto.class);
     }
 
     @Override
@@ -60,13 +62,13 @@ public class WorldMasterServiceImpl implements WorldMasterService {
     }
 
     @Override
-    public void createMaster(String name, Long age) {
-        masterRepo.save(modelMapper.map(new MasterDto(name, age), Master.class)); // or masterRepo.save(new Master(name, age)?
+    public void createMaster(SaveMasterDto dto) {
+        masterRepo.save(modelMapper.map(dto, Master.class));
     }
 
     @Override
     public void createPlanet(String name) {
-        planetRepo.save(modelMapper.map(new PlanetDto(name), Planet.class)); // or planetRepo.save(new Planet(name)?
+        planetRepo.save(new Planet(name));
     }
 
     @Override
@@ -79,18 +81,18 @@ public class WorldMasterServiceImpl implements WorldMasterService {
     }
 
     @Override
-    public MasterDto updateMasterByPlanet(Long idPlanet, Long idMaster) {
-        Optional<Planet> planet = planetRepo.findById(idPlanet);
+    public MasterDto updateMasterByPlanet(UpdateDto dto) {
+        Optional<Planet> planet = planetRepo.findById(dto.getPlanetId());
         if (planet.isEmpty()) {
             throw new PlanetNotFoundException("Planet not found");
         }
-        Optional<Master> grandMaster = masterRepo.findById(idMaster);
-        if (grandMaster.isEmpty()) {
+        Optional<Master> master = masterRepo.findById(dto.getMasterId());
+        if (master.isEmpty()) {
             throw new MasterNotFoundException("Master not found");
         }
-        planet.get().setMaster(grandMaster.get());
-        masterRepo.save(grandMaster.get());
-        return modelMapper.map(grandMaster.get(), MasterDto.class);
+        planet.get().setMaster(master.get());
+        masterRepo.save(master.get());
+        return modelMapper.map(master.get(), MasterDto.class);
     }
 
     @Override
