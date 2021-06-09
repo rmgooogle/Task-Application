@@ -54,12 +54,21 @@
 			"response": []
 		},
 		{
-			"name": "add/master/ name/ age",
+			"name": "add/master",
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Бездельница\",\r\n    \"age\": 28\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:8080/add/master/Jenny/28",
+					"raw": "http://localhost:8080/add/master",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -67,9 +76,7 @@
 					"port": "8080",
 					"path": [
 						"add",
-						"master",
-						"Jenny",
-						"28"
+						"master"
 					]
 				}
 			},
@@ -80,8 +87,17 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"masterId\": 1,\r\n        \"planetId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:8080/edit/master/1/2",
+					"raw": "http://localhost:8080/edit/master",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -89,9 +105,7 @@
 					"port": "8080",
 					"path": [
 						"edit",
-						"master",
-						"1",
-						"2"
+						"master"
 					]
 				}
 			},
