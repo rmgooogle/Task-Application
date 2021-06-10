@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface WorldMasterService {
 
-
     /**
      * Возвращает список всех повелителей
      *
@@ -18,7 +17,7 @@ public interface WorldMasterService {
     List<MasterDto> getAll();
 
     /**
-     * озвращает повелителя по id
+     * Возвращает повелителя по id
      *
      * @param id -
      * @return - возвращает {@link PlanetDto}
@@ -34,23 +33,23 @@ public interface WorldMasterService {
     PlanetDto getPlanetById(Long id);
 
     /**
-     * создание нового повелителя
+     * Создание нового повелителя
      *
      *@param dto - Состоит из двух параметров {@link SaveMasterDto#getName()} , {@link SaveMasterDto#getAge()}
      */
     void createMaster(SaveMasterDto dto);
 
     /**
-     * создание новой планеты
+     * Создание новой планеты
      *
      * @param name - Имя планеты
      */
     void createPlanet(String name);
 
     /**
-     * удаление планеты по id
+     * Удаление планеты по id
      *
-     * @param id
+     * @param id - id планеты
      */
     void deletePlanetById(Long id);
 
@@ -58,17 +57,21 @@ public interface WorldMasterService {
      * Назначение планеты повелителю
      *
      * @param updateDto - Состоит из двух id {masterId, planetId}
-     * @return - возвращаются обновленный Master
+     * @return - возвращаются обновленный  List  <{@link MasterDto}>
      */
     MasterDto updateMasterByPlanet(UpdateDto updateDto);
 
     /**
-     * @return - Возвращает список повелителей не имеющих планет
+     * Возвращает список повелителей не имеющих планет
+     *
+     * @return -  List  <{@link MasterDto}>
      */
     List<MasterDto> getSlackers();
 
     /**
-     * @return - List<Master> возвращает 10 молодых отсортированных повелителей
+     * Возвращает 10 молодых отсортированных повелителей
+     *
+     * @return - List  <{@link MasterDto}>
      */
     List<MasterDto> getTenYoungMasters();
 }
