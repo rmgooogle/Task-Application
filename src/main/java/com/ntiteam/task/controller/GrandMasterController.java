@@ -40,7 +40,7 @@ public class GrandMasterController {
     }
 
     @Operation(summary = "Назначает повелителю с {masterId} руководить планетой c {planetId}")
-    @PostMapping("/edit/master")
+    @PutMapping("/edit/master")
     public ResponseEntity<String> setPlanetToMaster(@RequestBody UpdateDto dto) {
         worldMasterService.updateMasterByPlanet(dto);
         return ResponseEntity.ok("Upload!");
