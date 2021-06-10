@@ -85,7 +85,7 @@
 		{
 			"name": "update master by planet",
 			"request": {
-				"method": "POST",
+				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",

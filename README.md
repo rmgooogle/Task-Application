@@ -22,16 +22,16 @@
 Написать тесты для этого функционала
 ______________________________________________
 ### Методы API
-1) Post /add/master
-2) Post /add/planet/{name}
-3) Post /edit/master
-4) Delete /delete/planet/{id}
-5) Get /get/masters/slacker
-6) Get /get/masters/young
+1) POST /add/master
+2) POST /add/planet/{name}
+3) PUT /edit/master
+4) DELETE /delete/planet/{id}
+5) GET /get/masters/slacker
+6) GET /get/masters/young
 
 #### Дополнительные методы
-7) Get /get/all
-8) Get /get/master/{idMaster}
+7) GET /get/all
+8) GET /get/master/{idMaster}
 
 
 Для проверки методов рекомендую использовать [Swagger](https://swagger.io), при запуске приложения, перейти по [адресу](http://localhost:8080/swagger-ui-task.html).
