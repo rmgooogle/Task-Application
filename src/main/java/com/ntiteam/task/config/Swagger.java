@@ -14,11 +14,11 @@ public class Swagger {
         return new OpenAPI()
                 .info(new Info()
                         .title("Masters and Planets REST API")
-                        .description("\"Spring Boot REST API for NTI team\"")
+                        .description("Spring Boot REST API for NTI team")
                         .version("1.0.0")
                         .contact(new Contact()
                             .name("Igor Kretov")
-                            .url("https://github.com/rmgooogle")
+                            .url("https://krasnodar.hh.ru/resume/e331afa7ff07491e750039ed1f4c5236396e4e")
                             .email("rm.gooogle@gmail.com")));
     }
 }
