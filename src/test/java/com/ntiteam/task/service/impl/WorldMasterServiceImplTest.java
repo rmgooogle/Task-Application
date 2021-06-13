@@ -4,6 +4,8 @@ import com.ntiteam.task.dto.MasterDto;
 import com.ntiteam.task.dto.PlanetDto;
 import com.ntiteam.task.dto.SaveMasterDto;
 import com.ntiteam.task.dto.UpdateDto;
+import com.ntiteam.task.exception.MasterNotFoundException;
+import com.ntiteam.task.exception.PlanetNotFoundException;
 import com.ntiteam.task.model.Master;
 import com.ntiteam.task.model.Planet;
 import com.ntiteam.task.repository.MasterRepo;
@@ -20,8 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class WorldMasterServiceImplTest {
@@ -93,7 +94,13 @@ class WorldMasterServiceImplTest {
         assertNotNull(returnedMasterDto);
         assertEquals(returnedMasterDto.getId(), 1L);
         verify(masterRepoTest, times(1)).findById(anyLong());
+    }
 
+    @Test
+    void getMasterExceptionById() {
+        Mockito.when(masterRepoTest.findById(anyLong())).thenReturn(Optional.empty());
+        assertThrows(MasterNotFoundException.class, () -> worldMasterServiceTest.getMasterById(1L));
+        verify(masterRepoTest, times(1)).findById(anyLong());
     }
 
     @Test
@@ -103,6 +110,13 @@ class WorldMasterServiceImplTest {
         PlanetDto returnedPlanetDto = worldMasterServiceTest.getPlanetById(1L);
         assertNotNull(returnedPlanetDto);
         assertEquals(returnedPlanetDto.getId(), 1L);
+        verify(planetRepoTest, times(1)).findById(anyLong());
+    }
+
+    @Test
+    void getPlanetExceptionById() {
+        Mockito.when(planetRepoTest.findById(anyLong())).thenReturn(Optional.empty());
+        assertThrows(PlanetNotFoundException.class, () -> worldMasterServiceTest.getPlanetById(1L));
         verify(planetRepoTest, times(1)).findById(anyLong());
     }
 
@@ -135,6 +149,21 @@ class WorldMasterServiceImplTest {
         verify(planetRepoTest, times(1)).findById(anyLong());
         verify(masterRepoTest, times(1)).findById(anyLong());
         verify(masterRepoTest, times(1)).save(any());
+    }
+
+    @Test
+    void updateMasterByPlanetException() {
+        Mockito.when(planetRepoTest.findById(any())).thenReturn(Optional.empty());
+        assertThrows(PlanetNotFoundException.class, () -> worldMasterServiceTest.updateMasterByPlanet(updateDto));
+        verify(planetRepoTest, times(1)).findById(anyLong());
+    }
+
+    @Test
+    void updateMasterExceptionByPlanet() {
+        Mockito.when(planetRepoTest.findById(any())).thenReturn(Optional.of(planet));
+        Mockito.when(masterRepoTest.findById(anyLong())).thenReturn(Optional.empty());
+        assertThrows(MasterNotFoundException.class, () -> worldMasterServiceTest.updateMasterByPlanet(updateDto));
+        verify(masterRepoTest, times(1)).findById(anyLong());
     }
 
     @Test
